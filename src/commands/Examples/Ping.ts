@@ -1,12 +1,12 @@
 import { Command } from 'discord-akairo';
-import { Message } from 'discord.js';
+import { Message, MessageEmbed } from 'discord.js';
 
 export default class PingCommand extends Command {
     public constructor() {
         super('ping', {
-            aliases: ['ping'],
+            aliases: ['ping', 'latency'],
             description: {
-                content: 'An example command that gets the bot\'s ping in ms.'
+                content: 'Gets the bot\'s heartbeat and latency. Useful to test if the bot is working.'
             },
             category: 'Examples',
             ratelimit: 0,
@@ -14,7 +14,12 @@ export default class PingCommand extends Command {
     }
 
     public async exec(message: Message): Promise<Message> {
-        const m = await message.util!.send(`Pinging...`);
-        return m.edit(`Pong! Bot ping: ${this.client.ws.ping}ms`);
+        const progressembed = new MessageEmbed().setColor([155, 200, 200]).setDescription('Pinging...');
+        const m = await message.util!.send(progressembed);
+        const resultembed = new MessageEmbed()
+            .setColor("RANDOM")
+            .setDescription(`Pong! **${Math.round(this.client.ws.ping).toString()}**ms`);
+
+        return m.edit(resultembed);
     }
 }

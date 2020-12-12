@@ -10,9 +10,7 @@ class ReadyListener extends discord_akairo_1.Listener {
         });
     }
     exec() {
-        console.log(`${this.client.user.tag} has started and should be online.`);
-        console.log(`Thank you for using Bot-Template by DanTechBoy!`);
-        console.log(`Nodejs version: ${process.version}`);
+        console.log(`${this.client.user.tag} has started suckers!`);
     }
 }
 exports.default = ReadyListener;
